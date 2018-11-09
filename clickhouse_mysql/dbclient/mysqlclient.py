@@ -58,21 +58,24 @@ class MySQLClient(object):
         try:
             self.connection = MySQLdb.connect(
                 host=self.host,
+                port=self.port,
                 user=self.user,
                 passwd=self.password,
                 db=db,
                 cursorclass=self.cursorclass,
             )
             self.cursor = self.connection.cursor()
-            logging.debug("Connect to the database host={} user={} password={} db={}".format(
+            logging.debug("Connect to the database host={} port={} user={} password={} db={}".format(
                 self.host,
+                self.port,
                 self.user,
                 self.password,
                 db
             ))
         except:
-            raise Exception("Can not connect to the database host={} user={} password={} db={}".format(
+            raise Exception("Can not connect to the database host={} port={} user={} password={} db={}".format(
                 self.host,
+                self.port,
                 self.user,
                 self.password,
                 db
@@ -104,8 +107,9 @@ class MySQLClient(object):
                 tables.append(table_name)
 
         except:
-            raise Exception("Can not list tables on host={} user={} password={} db={}".format(
+            raise Exception("Can not list tables on host={} port={} user={} password={} db={}".format(
                 self.host,
+                self.port,
                 self.user,
                 self.password,
                 db
